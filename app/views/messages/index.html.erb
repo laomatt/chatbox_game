@@ -9,6 +9,8 @@
     </tr>
   </thead>
 
+  <h3>Messages should apear here</h3>
+
   <tbody>
     <% @messages.each do |message| %>
       <tr>
@@ -23,3 +25,20 @@
 <br>
 
 <%= link_to 'New Message', new_message_path %>
+
+<script type="text/javascript">
+  var task = {
+    name: 'Start taking advantage of WebSockets',
+    completed: false
+  }
+
+  var dispatcher = new WebSocketRails('localhost:3000/websocket');
+
+  dispatcher.trigger('messages.create_message', task);
+
+  // dispatcher.bind('tasks.create_success', function(task) {
+  // console.log('successfully created ' + task.name);
+
+
+// });
+</script>

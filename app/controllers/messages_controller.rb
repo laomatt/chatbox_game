@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
   def show
   end
 
-  # GET /messages/new
+# GET /messages/new
   def new
     @message = Message.new
   end
@@ -24,16 +24,13 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
-
-    respond_to do |format|
-      if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @message }
-      else
-        format.html { render :new }
-        format.json { render json: @message.errors, status: :unprocessable_entity }
-      end
+    # The `message` method contains the data received
+    # task = Message.new(message_params)
+    task = Message.new message
+    if task.save
+      send_message :create_success, task, :namespace => :tasks
+    else
+      send_message :create_fail, task, :namespace => :tasks
     end
   end
 
